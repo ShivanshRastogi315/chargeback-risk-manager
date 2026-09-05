@@ -1,0 +1,23 @@
+# Visa Compelling Evidence 3.0 (CE3.0) - Initial Launch Rules (April 2023)
+# STATUS: Approximated for demonstration purposes per docs/DATASETS_GUIDE.md Section D
+# Focus: Foundational CE3.0 rule set emphasizing 120-365 day prior history, shipping PIN match, and device match.
+
+version: "ce3_2023"
+effective_date: "2023-04-15"
+network: "Visa"
+name: "Visa CE3.0 Initial Launch (April 2023)"
+description: "Foundational CE3.0 standard. Heavy reliance on 120-365 day undisputed transaction history, shipping address match, and static device ID."
+status: "approximated_for_demonstration"
+
+# Evidentiary criteria weights for rule-based rubric scoring and issuer decision simulation
+criteria_weights:
+  prior_undisputed_in_window: 0.35  # Undisputed transaction 120-365 days prior (mandatory anchor)
+  device_match: 0.30                # Exact device ID match
+  shipping_match: 0.20              # Shipping address / postal PIN code match
+  ip_match: 0.10                    # IP / Geo subnet match
+  cvv_avs_verified: 0.03            # Basic CVV/AVS check
+  otp_3ds_authenticated: 0.02       # Basic 3DS step-up authentication
+
+decision_threshold: 0.55
+noise_sigma: 0.08
+non_ce3_penalty_factor: 0.40

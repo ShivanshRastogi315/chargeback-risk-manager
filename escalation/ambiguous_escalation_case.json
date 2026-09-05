@@ -1,0 +1,123 @@
+{
+  "case_summary": {
+    "dispute_id": "dsp_demo_ambiguous_007",
+    "disputed_amount_inr": 850.0,
+    "reason_code": "10.4 (Fraud - Card-Absent Environment / Non-Recognition)",
+    "qualifying_criteria_matched": "3/6 criteria matched",
+    "rubric_confidence_score": "49.3%",
+    "model_win_probability": "49.3%",
+    "expected_net_value": "INR 391.38"
+  },
+  "telemetry_split_details": {
+    "device_match": "UNMATCHED (0.00) \u2014 Device dev_new_mobile_88bb is an unrecognized mobile browser",
+    "ip_match": "MATCHED (+0.15) \u2014 IP 103.21.50.10 matches prior settled order #ptx_hist_991",
+    "shipping_match": "UNMATCHED (0.00) \u2014 Delivery PIN 411038 differs from billing PIN 400001",
+    "historical_window": "BORDERLINE (+0.30) \u2014 Prior order age 121.0 days (threshold: 120.0 days)",
+    "authentication": "PARTIAL (+0.05) \u2014 CVV verified, 3DS step-up challenge not completed"
+  },
+  "slide_5_demo_comparison": {
+    "naive_system_without_conformal (What Broke)": {
+      "decision": "FIGHT",
+      "action": "AUTOMATED_CONTEST",
+      "flaw_narrative": "The naive ROI engine saw EV = +INR 391.38 (> 0) and blindly forced an automated 'FIGHT' verdict with zero uncertainty awareness. In reality, this borderline case loses at adjudication, costing the merchant a \u20b9200 loss penalty + \u20b925 review cost."
+    },
+    "ai_risk_manager_with_conformal (How We Got Out)": {
+      "decision": "ESCALATE_TO_HUMAN",
+      "action": "ROUTE_TO_HUMAN_ANALYST",
+      "conformal_prediction_set": [
+        0,
+        1
+      ],
+      "confidence_guarantee": "90.0% marginal coverage guarantee",
+      "error_rate_bound": "At most 10.0% error rate on auto-decisions",
+      "escalation_reasons": [
+        "Conformal prediction set contains both [NO_FIGHT (0), FIGHT (1)] at 90.0% confidence",
+        "Split evidentiary telemetry: 3 criteria matched (prior_undisputed_in_window, ip_match, cvv_avs_verified), 3 criteria unmatched"
+      ],
+      "guarantee_statement": "Statistically calibrated conformal guarantee: at most 10.0% error rate on auto-decided cases (90.0% marginal coverage guarantee).",
+      "success_narrative": "Conformal calibration detects the prediction set contains BOTH {NO_FIGHT (0), FIGHT (1)}. The system declines to guess and gracefully routes the case to a human analyst, backing its decision with a mathematically proven coverage guarantee."
+    }
+  },
+  "presenter_script": "Presenter Script (Slide 5 Deliberate Failure): 'Here is a genuinely ambiguous dispute where the IP matched, but the device is new and the prior order sits right at the 121-day boundary. Without our escalation layer, the system blindly guessed FIGHT because EV was +INR 391.38. With Module 5 active, the conformal predictor recognizes that both win and loss are plausible at 90% confidence and routes it to human review. That\\'s how we got out \u2014 not by claiming infallibility, but by knowing when the system does not know.'",
+  "raw_record": {
+    "dispute_id": "dsp_demo_ambiguous_007",
+    "transaction_id": "tx_demo_ambiguous_007",
+    "merchant_id": "merch_d2c_012",
+    "merchant_tier": "thin_history",
+    "merchant_prior_dispute_count": 8,
+    "amount": 850.0,
+    "currency": "INR",
+    "timestamp": "2025-08-20T14:15:30",
+    "reason_code": "10.4",
+    "reason_name": "Fraud - Card-Absent Environment / Non-Recognition",
+    "reason_network": "Visa",
+    "reason_ce3_eligible": 1,
+    "card_network": "Visa",
+    "card_type": "Credit",
+    "card_bin": "411111",
+    "card_last4": "5678",
+    "issuer_bank": "HDFC Bank",
+    "customer_name": "Rohan Deshmukh",
+    "customer_email": "rohan.deshmukh@example.com",
+    "device_id": "dev_new_mobile_88bb",
+    "device_type": "mobile_android",
+    "device_ip": "103.21.50.10",
+    "billing_city": "Mumbai",
+    "billing_state": "Maharashtra",
+    "billing_postal_code": "400001",
+    "shipping_city": "Pune",
+    "shipping_state": "Maharashtra",
+    "shipping_postal_code": "411038",
+    "cvv_avs_matched": true,
+    "otp_3ds_matched": false,
+    "prior_undisputed_window_count": 1,
+    "prior_transaction_age_min_days": 121.0,
+    "prior_transaction_age_max_days": 121.0,
+    "criterion_prior_window_match": 1,
+    "criterion_device_match": 0,
+    "criterion_ip_match": 1,
+    "criterion_shipping_match": 0,
+    "criterion_avs_cvv_match": 1,
+    "criterion_3ds_match": 0,
+    "total_criteria_matched": 3,
+    "issuer_dispute_won": 0,
+    "prior_transaction_history": [
+      {
+        "prior_tx_id": "ptx_hist_991",
+        "age_days": 121.0,
+        "device_id": "dev_matched_browser_77aa",
+        "ip_address": "103.21.50.10",
+        "shipping_pincode": "400001",
+        "status": "settled_undisputed",
+        "in_ce3_qualifying_window": true
+      }
+    ]
+  },
+  "decision_packet": {
+    "dispute_id": "dsp_demo_ambiguous_007",
+    "merchant_id": "merch_d2c_012",
+    "amount": 850.0,
+    "currency": "INR",
+    "reason_code": "10.4",
+    "decision": "ESCALATE_TO_HUMAN",
+    "action": "ROUTE_TO_HUMAN_ANALYST",
+    "conformal_prediction_set": [
+      0,
+      1
+    ],
+    "conformal_status": "AMBIGUOUS_SET",
+    "confidence_level_pct": 90.0,
+    "error_guarantee_pct": 10.0,
+    "p_win_calibrated": 0.493,
+    "expected_value_inr": 391.38,
+    "rubric_overall_score": 0.493,
+    "qualifying_criteria_count": 3,
+    "is_escalated": true,
+    "naive_decision_without_conformal": "FIGHT",
+    "escalation_reasons": [
+      "Conformal prediction set contains both [NO_FIGHT (0), FIGHT (1)] at 90.0% confidence",
+      "Split evidentiary telemetry: 3 criteria matched (prior_undisputed_in_window, ip_match, cvv_avs_verified), 3 criteria unmatched"
+    ],
+    "guarantee_statement": "Statistically calibrated conformal guarantee: at most 10.0% error rate on auto-decided cases (90.0% marginal coverage guarantee)."
+  }
+}

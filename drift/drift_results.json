@@ -1,0 +1,228 @@
+{
+  "training_version": "ce3_2023",
+  "live_version": "ce3_2026_04",
+  "drift_detection": {
+    "baseline_version": "ce3_2023",
+    "live_version_or_source": "ce3_2026_04",
+    "is_drift_detected": true,
+    "severity": "CRITICAL_DRIFT",
+    "metrics": {
+      "total_variation_distance": 0.4,
+      "l1_distance": 0.8,
+      "cosine_divergence": 0.3121
+    },
+    "primary_divergent_criteria": [
+      {
+        "criterion": "otp_3ds_authenticated",
+        "baseline_weight": 0.02,
+        "live_weight": 0.3,
+        "absolute_delta": 0.28,
+        "percentage_change": 1400.0,
+        "direction": "INCREASED"
+      },
+      {
+        "criterion": "prior_undisputed_in_window",
+        "baseline_weight": 0.35,
+        "live_weight": 0.15,
+        "absolute_delta": -0.2,
+        "percentage_change": -57.14,
+        "direction": "DECREASED"
+      },
+      {
+        "criterion": "cvv_avs_verified",
+        "baseline_weight": 0.03,
+        "live_weight": 0.15,
+        "absolute_delta": 0.12,
+        "percentage_change": 400.0,
+        "direction": "INCREASED"
+      },
+      {
+        "criterion": "device_match",
+        "baseline_weight": 0.3,
+        "live_weight": 0.2,
+        "absolute_delta": -0.1,
+        "percentage_change": -33.33,
+        "direction": "DECREASED"
+      },
+      {
+        "criterion": "shipping_match",
+        "baseline_weight": 0.2,
+        "live_weight": 0.15,
+        "absolute_delta": -0.05,
+        "percentage_change": -25.0,
+        "direction": "DECREASED"
+      },
+      {
+        "criterion": "ip_match",
+        "baseline_weight": 0.1,
+        "live_weight": 0.05,
+        "absolute_delta": -0.05,
+        "percentage_change": -50.0,
+        "direction": "DECREASED"
+      }
+    ],
+    "all_criteria": {
+      "prior_undisputed_in_window": {
+        "criterion": "prior_undisputed_in_window",
+        "baseline_weight": 0.35,
+        "live_weight": 0.15,
+        "absolute_delta": -0.2,
+        "percentage_change": -57.14,
+        "direction": "DECREASED"
+      },
+      "device_match": {
+        "criterion": "device_match",
+        "baseline_weight": 0.3,
+        "live_weight": 0.2,
+        "absolute_delta": -0.1,
+        "percentage_change": -33.33,
+        "direction": "DECREASED"
+      },
+      "shipping_match": {
+        "criterion": "shipping_match",
+        "baseline_weight": 0.2,
+        "live_weight": 0.15,
+        "absolute_delta": -0.05,
+        "percentage_change": -25.0,
+        "direction": "DECREASED"
+      },
+      "ip_match": {
+        "criterion": "ip_match",
+        "baseline_weight": 0.1,
+        "live_weight": 0.05,
+        "absolute_delta": -0.05,
+        "percentage_change": -50.0,
+        "direction": "DECREASED"
+      },
+      "cvv_avs_verified": {
+        "criterion": "cvv_avs_verified",
+        "baseline_weight": 0.03,
+        "live_weight": 0.15,
+        "absolute_delta": 0.12,
+        "percentage_change": 400.0,
+        "direction": "INCREASED"
+      },
+      "otp_3ds_authenticated": {
+        "criterion": "otp_3ds_authenticated",
+        "baseline_weight": 0.02,
+        "live_weight": 0.3,
+        "absolute_delta": 0.28,
+        "percentage_change": 1400.0,
+        "direction": "INCREASED"
+      }
+    },
+    "summary_narrative": "CRITICAL RULE DRIFT DETECTED (TVD = 0.4000 >= 0.15) between baseline 'ce3_2023' and live 'ce3_2026_04'. Key divergent criteria: otp_3ds_authenticated (INCREASED 1400.0%, delta +0.280); prior_undisputed_in_window (DECREASED 57.1%, delta -0.200); cvv_avs_verified (INCREASED 400.0%, delta +0.120). Silent win-rate degradation is active.",
+    "recommended_action": "RECALIBRATE_RUBRIC_TO_CURRENT_VERSION"
+  },
+  "performance_drop_summary": {
+    "pr_auc_drop": 0.0216,
+    "f1_drop": 0.0483,
+    "count_win_rate_drop_pct": 0.03,
+    "fp_cost_increase_inr": 675.0,
+    "fn_cost_increase_inr": 29852.8,
+    "total_error_cost_increase_inr": 30527.8,
+    "net_pnl_loss_inr": 30527.8
+  },
+  "matched_baseline": {
+    "model_version": "ce3_2023",
+    "env_version": "ce3_2023",
+    "is_matched": true,
+    "total_disputes": 203,
+    "performance": {
+      "pr_auc": 0.9905,
+      "roc_auc": 0.9901,
+      "accuracy": 0.9557,
+      "f1_score": 0.9623,
+      "precision": 0.9426,
+      "recall": 0.9829
+    },
+    "win_rates": {
+      "count_win_rate_contested_pct": 0.94,
+      "amount_win_rate_contested_pct": 0.96,
+      "contested_count": 122,
+      "contested_ratio_pct": 60.1
+    },
+    "confusion_counts": {
+      "tp": 115,
+      "fp": 7,
+      "fn": 2,
+      "tn": 79
+    },
+    "financial_metrics_inr": {
+      "tp_net_recovery_inr": 314529.02,
+      "fp_cost_inr": 1575.0,
+      "fn_cost_inr": 6975.05,
+      "tn_fees_saved_inr": 15800.0,
+      "total_error_cost_inr": 8550.05,
+      "net_realized_pnl_inr": 312954.02
+    }
+  },
+  "mismatched_silent_failure": {
+    "model_version": "ce3_2023",
+    "env_version": "ce3_2026_04",
+    "is_matched": false,
+    "total_disputes": 203,
+    "performance": {
+      "pr_auc": 0.9751,
+      "roc_auc": 0.9571,
+      "accuracy": 0.9163,
+      "f1_score": 0.9323,
+      "precision": 0.959,
+      "recall": 0.907
+    },
+    "win_rates": {
+      "count_win_rate_contested_pct": 0.96,
+      "amount_win_rate_contested_pct": 0.98,
+      "contested_count": 122,
+      "contested_ratio_pct": 60.1
+    },
+    "confusion_counts": {
+      "tp": 117,
+      "fp": 5,
+      "fn": 12,
+      "tn": 69
+    },
+    "financial_metrics_inr": {
+      "tp_net_recovery_inr": 320333.54,
+      "fp_cost_inr": 1125.0,
+      "fn_cost_inr": 32614.58,
+      "tn_fees_saved_inr": 13800.0,
+      "total_error_cost_inr": 33739.58,
+      "net_realized_pnl_inr": 319208.54
+    }
+  },
+  "matched_adapted": {
+    "model_version": "ce3_2026_04",
+    "env_version": "ce3_2026_04",
+    "is_matched": true,
+    "total_disputes": 203,
+    "performance": {
+      "pr_auc": 0.9968,
+      "roc_auc": 0.9958,
+      "accuracy": 0.9754,
+      "f1_score": 0.9805,
+      "precision": 0.9844,
+      "recall": 0.9767
+    },
+    "win_rates": {
+      "count_win_rate_contested_pct": 0.98,
+      "amount_win_rate_contested_pct": 0.99,
+      "contested_count": 128,
+      "contested_ratio_pct": 63.05
+    },
+    "confusion_counts": {
+      "tp": 126,
+      "fp": 2,
+      "fn": 3,
+      "tn": 72
+    },
+    "financial_metrics_inr": {
+      "tp_net_recovery_inr": 350186.34,
+      "fp_cost_inr": 450.0,
+      "fn_cost_inr": 2761.78,
+      "tn_fees_saved_inr": 14400.0,
+      "total_error_cost_inr": 3211.78,
+      "net_realized_pnl_inr": 349736.34
+    }
+  }
+}

@@ -1,0 +1,23 @@
+# Visa Compelling Evidence 3.0 (CE3.0) - Auto-Qualification Expansion (October 2025)
+# STATUS: Approximated for demonstration purposes per docs/DATASETS_GUIDE.md Section D
+# Focus: Auto-qualification expansion with elevated 3DS OTP and modern biometric device tokens.
+
+version: "ce3_2025_10"
+effective_date: "2025-10-01"
+network: "Visa"
+name: "Visa CE3.0 Expanded Auto-Qualification (October 2025)"
+description: "Expanded digital identity auto-qualification. Elevated weights on 3DS/OTP step-up verification and biometric device fingerprints."
+status: "approximated_for_demonstration"
+
+# Evidentiary criteria weights for rule-based rubric scoring and issuer decision simulation
+criteria_weights:
+  prior_undisputed_in_window: 0.25  # Moderated prior window anchor
+  device_match: 0.25                # Device fingerprint / token match
+  shipping_match: 0.15              # Shipping address match (relaxed for digital/omnichannel)
+  ip_match: 0.10                    # IP / Geo subnet match
+  cvv_avs_verified: 0.10            # Multi-point CVV/AVS verification
+  otp_3ds_authenticated: 0.15       # Strong 3DS OTP authentication
+
+decision_threshold: 0.55
+noise_sigma: 0.08
+non_ce3_penalty_factor: 0.40

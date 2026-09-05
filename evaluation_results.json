@@ -1,0 +1,273 @@
+{
+  "dataset_summary": {
+    "total_transactions": 50000,
+    "total_disputes": 203,
+    "train_disputes_count": 152,
+    "test_disputes_count": 51,
+    "dispute_rate_pct": 0.406
+  },
+  "module_1_rubric_scorer": {
+    "overall_pr_auc": 0.9978,
+    "overall_roc_auc": 0.9969,
+    "per_criterion": {
+      "prior_undisputed_in_window": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "positive_support": 33,
+        "total_samples": 51,
+        "match_rate": 0.6470588235294118
+      },
+      "device_match": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "positive_support": 30,
+        "total_samples": 51,
+        "match_rate": 0.5882352941176471
+      },
+      "shipping_match": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "positive_support": 34,
+        "total_samples": 51,
+        "match_rate": 0.6666666666666666
+      },
+      "ip_match": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "positive_support": 22,
+        "total_samples": 51,
+        "match_rate": 0.43137254901960786
+      },
+      "cvv_avs_verified": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "positive_support": 50,
+        "total_samples": 51,
+        "match_rate": 0.9803921568627451
+      },
+      "otp_3ds_authenticated": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "positive_support": 35,
+        "total_samples": 51,
+        "match_rate": 0.6862745098039216
+      }
+    }
+  },
+  "module_2_roi_engine": {
+    "cold_start_thin_slice": {
+      "thin_test_count": 7,
+      "thin_train_history_count": 15,
+      "comparison_table": [
+        {
+          "Model / Mode": "Mode A (GBDT - Thin History Only)",
+          "History Available": "15 disputes",
+          "PR-AUC": 1.0,
+          "ROC-AUC": 1.0,
+          "Brier Score": 0.04815872714285715,
+          "Count Win Rate": 0.75,
+          "Amount Win Rate": 0.9267348500587772,
+          "Net PnL (INR)": 6962.800000000001,
+          "Recovery %": 100.0
+        },
+        {
+          "Model / Mode": "Mode B (TabPFN - Few-Shot Cold Start)",
+          "History Available": "15 disputes",
+          "PR-AUC": 1.0,
+          "ROC-AUC": 1.0,
+          "Brier Score": 0.0008134971428571421,
+          "Count Win Rate": 1.0,
+          "Amount Win Rate": 1.0,
+          "Net PnL (INR)": 7002.800000000001,
+          "Recovery %": 100.0
+        },
+        {
+          "Model / Mode": "Mode A (GBDT - Full Cross-Merchant History)",
+          "History Available": "152 disputes",
+          "PR-AUC": 1.0,
+          "ROC-AUC": 1.0,
+          "Brier Score": 6.48385714285712e-05,
+          "Count Win Rate": 1.0,
+          "Amount Win Rate": 1.0,
+          "Net PnL (INR)": 7002.800000000001,
+          "Recovery %": 100.0
+        }
+      ],
+      "models": {
+        "MODE_A_GBDT_THIN": {
+          "model_name": "Mode A (GBDT - Thin History Only)",
+          "history_count": 15,
+          "pr_auc": 1.0,
+          "roc_auc": 1.0,
+          "f1_score": 0.8571428571428571,
+          "brier_score": 0.04815872714285715,
+          "net_pnl_inr": 6962.800000000001
+        },
+        "MODE_B_TABPFN_FEWSHOT": {
+          "model_name": "Mode B (TabPFN - Few-Shot Cold Start)",
+          "history_count": 15,
+          "pr_auc": 1.0,
+          "roc_auc": 1.0,
+          "f1_score": 1.0,
+          "brier_score": 0.0008134971428571421,
+          "net_pnl_inr": 7002.800000000001
+        },
+        "MODE_A_GBDT_FULL": {
+          "model_name": "Mode A (GBDT - Full Cross-Merchant History)",
+          "history_count": 152,
+          "pr_auc": 1.0,
+          "roc_auc": 1.0,
+          "f1_score": 1.0,
+          "brier_score": 6.48385714285712e-05,
+          "net_pnl_inr": 7002.800000000001
+        }
+      },
+      "eval_mode_a_thin": {
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "brier_score": 0.04815872714285715,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1_score": 0.8571428571428571,
+        "count_win_rate": 0.75,
+        "amount_weighted_win_rate": 0.9267348500587772,
+        "threshold": 0.5,
+        "financials": {
+          "recovered_revenue_inr": 7047.800000000001,
+          "net_pnl_inr": 6962.800000000001,
+          "review_costs_inr": 60.0,
+          "fight_lose_fees_inr": 25.0,
+          "fp_cost_incurred_inr": 40.0,
+          "fn_opportunity_loss_inr": 0.0,
+          "recovery_rate": 1.0,
+          "count_contested": 4,
+          "count_won": 3,
+          "count_lost": 1,
+          "count_missed": 0
+        }
+      },
+      "eval_mode_b_thin": {
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "brier_score": 0.0008134971428571421,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "count_win_rate": 1.0,
+        "amount_weighted_win_rate": 1.0,
+        "threshold": 0.5,
+        "financials": {
+          "recovered_revenue_inr": 7047.800000000001,
+          "net_pnl_inr": 7002.800000000001,
+          "review_costs_inr": 45.0,
+          "fight_lose_fees_inr": 0.0,
+          "fp_cost_incurred_inr": 0.0,
+          "fn_opportunity_loss_inr": 0.0,
+          "recovery_rate": 1.0,
+          "count_contested": 3,
+          "count_won": 3,
+          "count_lost": 0,
+          "count_missed": 0
+        }
+      },
+      "eval_mode_a_full": {
+        "pr_auc": 1.0,
+        "roc_auc": 1.0,
+        "brier_score": 6.48385714285712e-05,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "count_win_rate": 1.0,
+        "amount_weighted_win_rate": 1.0,
+        "threshold": 0.5,
+        "financials": {
+          "recovered_revenue_inr": 7047.800000000001,
+          "net_pnl_inr": 7002.800000000001,
+          "review_costs_inr": 45.0,
+          "fight_lose_fees_inr": 0.0,
+          "fp_cost_incurred_inr": 0.0,
+          "fn_opportunity_loss_inr": 0.0,
+          "recovery_rate": 1.0,
+          "count_contested": 3,
+          "count_won": 3,
+          "count_lost": 0,
+          "count_missed": 0
+        }
+      }
+    },
+    "full_test_eval": {
+      "pr_auc": 0.9978,
+      "roc_auc": 0.9969,
+      "contested_ratio": 0.9216
+    }
+  },
+  "module_3_narrative_generator": {
+    "citation_resolution_rate_pct": 100.0,
+    "sentence_grounding_rate_pct": 100.0,
+    "guardrail_pass_rate_pct": 100.0,
+    "deliberate_corruption_detection_rate_pct": 100.0
+  },
+  "financial_and_win_rate_outcomes": {
+    "total_disputes": 51,
+    "contested_count": 47,
+    "uncontested_count": 4,
+    "tp_count": 29,
+    "fp_count": 18,
+    "tn_count": 4,
+    "fn_count": 0,
+    "tp_gross_amount_inr": 89813.98,
+    "tp_net_recovery_inr": 89088.98,
+    "fp_cost_inr": 4050.0,
+    "fn_cost_inr": 0.0,
+    "tn_fees_saved_inr": 800.0,
+    "total_error_cost_inr": 4050.0,
+    "net_realized_pnl_inr": 85038.98,
+    "baseline_net_pnl_inr": 84138.98,
+    "net_monetary_lift_inr": 900.0,
+    "count_win_rate_contested": 61.7,
+    "amount_win_rate_contested": 56.78
+  },
+  "business_roi_projection": {
+    "assumptions": {
+      "monthly_transactions": 60000,
+      "dispute_rate": 0.00406,
+      "monthly_disputes": 243.6,
+      "avg_disputed_value_inr": 2952.4,
+      "contest_rate": 92.2,
+      "baseline_win_rate": 35.0,
+      "measured_win_rate": 61.7,
+      "fight_and_lose_fee_inr": 200.0,
+      "analyst_hourly_cost_inr": 400.0
+    },
+    "monthly_breakdown_inr": {
+      "baseline_net_recovery": 202794.41,
+      "system_net_recovery": 391764.02,
+      "win_rate_lift_benefit": 188969.61,
+      "fees_avoided_benefit": 3821.18,
+      "labor_savings_benefit": 48720.0,
+      "net_monthly_benefit": 241510.79
+    },
+    "annualized_inr": {
+      "net_annual_benefit_inr": 2898129.45,
+      "net_annual_benefit_lakhs": 28.98
+    }
+  }
+}
